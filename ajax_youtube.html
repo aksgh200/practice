@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        var xmlHttp = new XMLHttpRequest();
+
+        function send() { // AIzaSyBQg3nfhFuXRx7tKWRJIdHn0VuteFj5vcM
+            var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBQg3nfhFuXRx7tKWRJIdHn0VuteFj5vcM&q=%EC%9B%90%ED%94%BC%EC%8A%A4";
+            xmlHttp.onreadystatechange = callback;
+            xmlHttp.open("GET", url, true);
+            xmlHttp.send(null);
+        }
+
+        function callback() {
+            if (xmlHttp.readyState == 4) {
+                if (xmlHttp.status == 200) {
+                    temp = xmlHttp.responseText;
+                    temp = JSON.parse(temp);
+                    var items = temp.items;
+                    var tag = '';
+                    for(var idx in items) {
+                        var item = items[idx];
+                        var videoId = item.id.videoId;
+                        var snippet = item.snippet;
+                        var img = snippet.thumbnails.default.url;
+                        var title = snippet.title;
+                        tag += `<h3>${title}</h3>`;
+                        tag += `<img src='${img}'><br>`;
+                        tag += `<iframe src='${videoId}'>`;
+                    }
+                    
+
+
+
+                    document.querySelector('body').innerHTML += tag;
+                }
+            }
+        }    
+    </script>
+</head>
+
+<body>
+    <input type="button" value="요청" onclick="send()">
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+    <script>
+        var xmlHttp = new XMLHttpRequest();
+
+        function send() {
+            var url = "http://ggoreb.com/ajax/json/data1.jsp";
+            // 통신 상태에 따라 동작될 callback 함수 지정
+            xmlHttp.onreadystatechange = callback; 
+            // http메소드, 요청주소, 비동기/동기 여부
+            xmlHttp.open("GET", url, true);
+            // POST 통신 시 파라미터 지정
+            // GET 통신 시 null
+            xmlHttp.send(null);
+        }
+
+        function callback() {
+            
+            if(xmlHttp.readyState == 4) {
+
+                
+                if(xmlHttp.status == 200) {
+                    temp = xmlHttp.responseText;
+                    temp = JSON.parse(temp);
+                   var response = temp.response;
+                   var body = response.body;
+                   var item = body.item;
+                   var item = item.item;
+                   var tag = '<table>';
+                   for(var i =0; i < item.length; i++) {
+                       var it =item[i];
+                       var addr1 = it.addr1;
+                       var title = it.title;
+                       tag += '<tr><td>${addr1}</td><td>${title}</td></tr>';
+                       tag +='</table>'
+                       document.querySelector('body').innerHTML += tag;
+                   } 
+                  
+                }
+            }
+        }    
+    </script>
+</head>
+
+<body>
+    <input type="button" value="요청" onclick="send()">
+</body>
+
+</html>

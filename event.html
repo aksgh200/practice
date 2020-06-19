@@ -1,0 +1,32 @@
+<head>
+    <script>
+        function fnClick(obj) {
+            console.dir(obj);
+            console.log(obj.name);
+            obj.style.backgroundColor = 'red';
+
+        }
+       
+        function fnMouseOut(obj) {
+            var z = alert;
+            z('Hi~~~~');
+            var a= 10;
+            var b =100;
+            
+            obj.style.backgroundColor = "#ffffff";
+        }
+        function fnMouseOver(obj) {
+            obj.style.backgroundColor = "#ff0000";
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <form>
+        <input type="text" name="id" value="아이디1">
+        <input type="text" name="id" value="아이디2" onmousedown="fnMouseDown()" onmouseout="fnMouseOut(this)"
+            onmouseover="fnMouseOver(this)">
+    </form>
+</body>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        var xmlHttp = new XMLHttpRequest();
+
+        function send() { // AIzaSyBQg3nfhFuXRx7tKWRJIdHn0VuteFj5vcM
+            var url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?serviceKey=A2usf4txsthrBPXx7%2FckSjISrlOOF3DRCXlpwxFKcl1KPyvOOWSD%2FUhcapvCkM51AdZOieooIvkMdz2XQCt33w%3D%3D&MobileOS=ETC&MobileApp=AppTest&eventStartDate=20200618&_type=json";
+            xmlHttp.onreadystatechange = callback;
+            xmlHttp.open("GET", url, true);
+            xmlHttp.send(null);
+        }
+
+        function callback() {
+            if (xmlHttp.readyState == 4) {
+                if (xmlHttp.status == 200) {
+                    temp = xmlHttp.responseText;
+                    temp = JSON.parse(temp);
+                    var response = temp.response;
+                    var body = response.body;
+                    var items = body.items;
+                    var item = items.item;
+                    var tag = '<table>';
+                    for (var i = 0; i < item.length; i++) {
+                        var it = item[i];
+                        var addr1 = it.addr1;
+                        var title = it.title;
+                        tag += `<tr><td>${addr1}</td><td>${title}</td></tr>`;
+                    }
+                    tag += '</table>';
+                    document.querySelector('body').innerHTML += tag;
+                }
+            }
+        }    
+    </script>
+</head>
+
+<body>
+    <input type="button" value="요청" onclick="send()">
+</body>
+
+</html>

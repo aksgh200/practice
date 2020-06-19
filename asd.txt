@@ -1,0 +1,11 @@
+using namespace std;
+
+int min (int a, int b){
+  return a>b ? b : a;
+}
+
+int main() {
+     int arr[1000001] = {0, };
+     int i,N;
+
+  scanf("%d",%N

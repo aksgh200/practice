@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src= "http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script>
+        $(function(){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos){
+                    $('#latitude').html(pos.coords.latitude);
+                    $('#longitube').html(pos.coords.longitude);
+                });
+                $('#btnStop').click(function() {
+                navigator.geolocation.clearWatch(id);
+            });
+
+            }else{
+                alert("이 브라우저에서는 Geolocationdl 지원되지 않습니다.")
+            }
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li>위도:<span id ="latitude"></span></li>
+        <li>경도:<span id ="longitude"></span></li>
+    </ul>
+    <input id="btnStop" type="button" value="감시를 끝낸다" />
+</body>
+</html>
